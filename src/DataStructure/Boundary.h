@@ -6,7 +6,7 @@
 
 #include "SubKey.h"
 #include "Configure.h"
-#include <boost/lexical_cast.hpp>
+// #include <boost/lexical_cast.hpp>
 #include <string>
 #include <sstream>
 #include <time.h>

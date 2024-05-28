@@ -98,7 +98,7 @@
 
 // Define the _MSC_VER_TETGEN symbol if you are using Microsoft Visual C++.
 
- #define _MSC_VER_TETGEN
+// #define _MSC_VER_TETGEN
 
 // Define the _WIN64 symbol if you are running TetGen on Win64.
 

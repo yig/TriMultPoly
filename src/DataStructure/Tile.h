@@ -6,7 +6,7 @@
 #include <float.h>
 #include <stdlib.h>
 #include <vector>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 using namespace std;
 extern int tileNum;

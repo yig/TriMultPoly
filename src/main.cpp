@@ -1,9 +1,9 @@
 #include "DMWT.h"
 #include <string>
 #include <time.h>
-#include "windows.h"
-#include "psapi.h"
-#pragma comment(lib, "psapi.lib") 
+// #include "windows.h"
+// #include "psapi.h"
+// #pragma comment(lib, "psapi.lib") 
 using namespace std;
 float timeNew;
 int tileNum;

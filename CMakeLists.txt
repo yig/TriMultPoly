@@ -4,6 +4,8 @@ project(
     LANGUAGES CXX C
 )
 
+# find_package(Boost)
+
 ## Declare tetgen library
 add_library(tetgen OBJECT
     ExternalLibs/tetgen/tetgen1.4.3/src/tetgen.cxx
@@ -26,5 +28,6 @@ add_executable(TriMultPoly
     )
 set_target_properties(TriMultPoly PROPERTIES CXX_STANDARD 11)
 target_include_directories(TriMultPoly PRIVATE src/Algorithm src/DataStructure src/Utility)
+target_compile_definitions(TriMultPoly PRIVATE __forceinline=inline)
 
 target_link_libraries(TriMultPoly PRIVATE tetgen)

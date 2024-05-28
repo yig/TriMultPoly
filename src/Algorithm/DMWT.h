@@ -11,8 +11,8 @@
 #include "Hole.h"
 #include "Tile.h"
 #include "SubKey.h"
-#include <boost/unordered_map.hpp>
-#include <boost/heap/priority_queue.hpp>
+#include <unordered_map>
+// #include <boost/heap/priority_queue.hpp>
 #include <utility> 
 #include <fstream>
 #include <string>
@@ -33,9 +33,9 @@
 #define isBoardE(e) edgeInfoList[e]->isBD
 #define PI 3.1415926f
 
-typedef boost::unordered_map< __int64, size_t> wekhashmap;
+typedef std::unordered_map< __int64, size_t> wekhashmap;
 
-typedef boost::unordered_map< SubKey<MAXK>, int, MySubKeyHash<MAXK>,  MySubKeyEq<MAXK>> hashmap;
+typedef std::unordered_map< SubKey<MAXK>, int, MySubKeyHash<MAXK>,  MySubKeyEq<MAXK>> hashmap;
 
 class DMWT{
 public:

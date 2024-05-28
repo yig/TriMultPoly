@@ -89,3 +89,14 @@ Each normal is defined on an input edge. For example, the ith normal in a polygo
 
 Tested on Window7 64bit.
 External Lib: tetgen1.4.3; boost_1_53_0
+
+---
+
+Updated by Yotam Gingold to compile on macOS. Light modernization removed boost dependency. Compile with CMake:
+
+```
+mkdir build
+cd build
+cmake ..
+make
+```

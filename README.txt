@@ -6,7 +6,7 @@ Publication: Eurographics Symposium on Geometry Processing (SGP) 2013
 Author: Ming Zou (mingzou@wustl.edu), Tao Ju, Nathan Carr
 Version: 1.0 
 Last update: June 28, 2013
-
+Web page: <https://www.cs.wustl.edu/~taoju/zoum/projects/TriMultPoly/index.html>
 
 I. Introduction==================================================================================
 

@@ -32,7 +32,7 @@ public:
 	int find(int ci);
 	std::vector<std::pair<Hole,Hole>> partition();
 
-	int countBit(__int64 bit, int n);
+	int countBit(int64_t bit, int n);
 	void getSubKey(SubKey<MAXK> & sk);
 
 	__forceinline void append(int item){

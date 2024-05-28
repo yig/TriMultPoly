@@ -26,13 +26,13 @@ void suf_cmd( int argc, char *argv[] ){
 		return;
 	}
 
-	char * testfile = argv[1];
-	char * curvefile = new char[300];
-	char * normalfile = new char[300];
-	char * canTfile = new char[300];
-	strcpy_s(curvefile,300,testfile); strcat_s(curvefile,300,".curve");
-	strcpy_s(normalfile,300,testfile); strcat_s(normalfile,300,".normal");
-	strcpy_s(canTfile,300,testfile); strcat_s(canTfile,300,".tri");
+	std::string testfile = argv[1];
+	std::string curvefile;
+	std::string normalfile;
+	std::string canTfile;
+	curvefile = testfile + ".curve";
+	normalfile = testfile + ".normal";
+	canTfile = testfile + ".tri";
 
 	bool useDT=true;
 	const char* tagDT = argv[2];
@@ -42,10 +42,10 @@ void suf_cmd( int argc, char *argv[] ){
 	const char* tagFWE = argv[3];
 	filterWE=(strcmp(tagFWE,"1")==0);
 
-	float weightTri;	sscanf_s(argv[4],"%f",&weightTri,sizeof(float));
-	float weightEdge;	sscanf_s(argv[5],"%f",&weightEdge,sizeof(float));
-	float weightBiTri;	sscanf_s(argv[6],"%f",&weightBiTri,sizeof(float));
-	float weightTriBd;	sscanf_s(argv[7],"%f",&weightTriBd,sizeof(float));
+	float weightTri = stof(argv[4]);
+	float weightEdge = stof(argv[5]);
+	float weightBiTri = stof(argv[6]);
+	float weightTriBd = stof(argv[7]);
 
 	bool saveObj=false;
 	const char* tagObj = argv[8];
@@ -57,9 +57,9 @@ void suf_cmd( int argc, char *argv[] ){
 
 	DMWT * myDMWT;
 	if (useNormal){
-		myDMWT = new DMWT(curvefile, normalfile, useDT, 0, 1, filterWE, saveObj);
+		myDMWT = new DMWT(curvefile.c_str(), normalfile.c_str(), useDT, 0, 1, filterWE, saveObj);
 	} else {
-		myDMWT = new DMWT(curvefile, useDT,  0, 1, filterWE, saveObj);
+		myDMWT = new DMWT(curvefile.c_str(), useDT,  0, 1, filterWE, saveObj);
 	}
 	myDMWT->setWeights(weightTri, weightEdge, weightBiTri, weightTriBd);
 
@@ -82,12 +82,12 @@ void suf_cmd( int argc, char *argv[] ){
 	cout<<"<N> numCurves: "<<myDMWT->numofcurves<<endl;
 	cout<<"<N> numPts: "<<myDMWT->orgnumofvertices<<endl;
 	cout<<"<T> time: "<<timeList+timeTile<<" (secs)\n";
-	HANDLE hProc = GetCurrentProcess();
-	PROCESS_MEMORY_COUNTERS_EX info;
-	info.cb = sizeof(info);
-	BOOL okay = GetProcessMemoryInfo(hProc, (PROCESS_MEMORY_COUNTERS*)&info, info.cb);
-	size_t memusage = info.WorkingSetSize;
-	cout<<"<M> memory: "<<memusage/1024<<" KB"<<endl;
+// 	HANDLE hProc = GetCurrentProcess();
+// 	PROCESS_MEMORY_COUNTERS_EX info;
+// 	info.cb = sizeof(info);
+// 	BOOL okay = GetProcessMemoryInfo(hProc, (PROCESS_MEMORY_COUNTERS*)&info, info.cb);
+// 	size_t memusage = info.WorkingSetSize;
+// 	cout<<"<M> memory: "<<memusage/1024<<" KB"<<endl;
 	cout<<"----------------------------"<<endl;
 	cout<<"cost: "<<myDMWT->optCost<<endl;
 	cout<<"numSub: "<<myDMWT->numSub<<endl;
@@ -105,11 +105,11 @@ void ep_cmd( int argc, char *argv[] ) {
 		return;
 	}
 
-	char * testfile = argv[2];
-	char * curvefile = new char[300];
-	char * normalfile = new char[300];
-	strcpy_s(curvefile,300,testfile); strcat_s(curvefile,300,".curve");
-	strcpy_s(normalfile,300,testfile); strcat_s(normalfile,300,".normal");
+	std::string testfile = argv[2];
+	std::string curvefile;
+	std::string normalfile;
+	curvefile = testfile + ".curve";
+	normalfile = testfile + ".normal";
 
 	bool useDT=true;
 	bool filterWE=false;
@@ -125,9 +125,9 @@ void ep_cmd( int argc, char *argv[] ) {
 
 	DMWT * myDMWT;
 	if (useNormal){
-		myDMWT = new DMWT(curvefile, normalfile, useDT, 0, 1, filterWE, saveObj);
+		myDMWT = new DMWT(curvefile.c_str(), normalfile.c_str(), useDT, 0, 1, filterWE, saveObj);
 	} else {
-		myDMWT = new DMWT(curvefile, useDT,  0, 1, filterWE, saveObj);
+		myDMWT = new DMWT(curvefile.c_str(), useDT,  0, 1, filterWE, saveObj);
 	}
 }
 
@@ -136,7 +136,7 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option)
     return std::find(begin, end, option) != end;
 }
 
-void main( int argc, char *argv[] ){
+int main( int argc, char *argv[] ){
 
 	timeNew = 0.0;
 	tileNum = 0;
@@ -147,5 +147,5 @@ void main( int argc, char *argv[] ){
 	} else {
 		suf_cmd(argc, argv);
 	}
-
+	return 0;
 }

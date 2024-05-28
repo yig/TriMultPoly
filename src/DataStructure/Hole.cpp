@@ -50,7 +50,7 @@ std::vector<std::pair<Hole,Hole>> Hole::partition(){
 	return res;
 }
 
-int Hole::countBit(__int64 bit, int n){
+int Hole::countBit(int64_t bit, int n){
 	int count = 0;
 	int mask=1;
 	for (int pos=0; pos<n; pos++){

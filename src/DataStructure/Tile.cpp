@@ -1,12 +1,12 @@
 //#include "Tile.h"
 
-//typedef boost::unordered_map< __int64, OneTile*> tilemap;
+//typedef boost::unordered_map< int64_t, OneTile*> tilemap;
 // ----------------OneTile
 /*OneTile::OneTile(){
 	tileNum++;
 	WECode = 0; cost = FLT_MAX; tri = -1; //next1 = -1; next2 = -1;
 }
-OneTile::OneTile(__int64 wec, float c, int t, int nxt1, int nxt2){
+OneTile::OneTile(int64_t wec, float c, int t, int nxt1, int nxt2){
 	tileNum++;
 	WECode = wec; cost = c; tri = t; //next1 = nxt1; next2 = nxt2;
 }

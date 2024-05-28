@@ -33,7 +33,7 @@
 #define isBoardE(e) edgeInfoList[e]->isBD
 #define PI 3.1415926f
 
-typedef std::unordered_map< __int64, size_t> wekhashmap;
+typedef std::unordered_map< int64_t, size_t> wekhashmap;
 
 typedef std::unordered_map< SubKey<MAXK>, int, MySubKeyHash<MAXK>,  MySubKeyEq<MAXK>> hashmap;
 
@@ -41,7 +41,7 @@ class DMWT{
 public:
 	DMWT(){}
 	// use candidate triangle file
-	DMWT(char* curvefile, char* canTfile, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
+	DMWT(const char* curvefile, const char* canTfile, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
 		useNormal = false;
 		badInput=false;
 		isDeGen=false;
@@ -57,7 +57,7 @@ public:
 		numoftilingtris = 0;
 	}
 	// without normal
-	DMWT(char* curvefile, const bool uDT, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
+	DMWT(const char* curvefile, const bool uDT, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
 		useNormal = false;
 		badInput=false;
 		isDeGen=false;
@@ -78,7 +78,7 @@ public:
 		numoftilingtris = 0;
 	}
 	// with normal
-	DMWT(char* curvefile, char* normalfile, const bool uDT, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
+	DMWT(const char* curvefile, const char* normalfile, const bool uDT, const bool pDP, const bool uWE, const bool fWE, const bool sObj){
 		useNormal = true;
 		badInput=false;
 		isDeGen=false;
@@ -191,8 +191,8 @@ public:
 	void tile();
 	void setWeights(float wtri, float wedge, float wbitri, float wtribd);
 	void saveTiling();
-	void saveTiling(char* tilefile);
-	void saveTilingObj(char* tilefile);
+	void saveTiling(const char* tilefile);
+	void saveTilingObj(const char* tilefile);
 	void saveTiling(int OTid);
 	void statistics();
 
@@ -229,8 +229,8 @@ public:
 	bool isBoardEdge(const Boundary<MAXK>& B);
 	bool isMeetingSpanE(const Boundary<MAXK>& B);
 	void getIntervalsB(const Boundary<MAXK>& B, Interval<MAXK>& Intvs);
-	__int64 GetBitKey(const vector<int>& canItem,const vector<int>& allItem);
-	void RecoverListFromBitKey(const vector<int>& list, __int64 key,vector<int>& outlist );
+	int64_t GetBitKey(const vector<int>& canItem,const vector<int>& allItem);
+	void RecoverListFromBitKey(const vector<int>& list, int64_t key,vector<int>& outlist );
 
 	//-------------Edge Protection
 	std::vector<Point3> tempC;
@@ -264,9 +264,9 @@ public:
 	bool sameOrientation(const vector<int> & newCurve, int start, int len);
 
 	//-------------Tiles
-	int newTile(__int64 wec, float c, int t, int nxt1, int nxt2);
-	int appendTile(__int64 wec, float c, int t, int nxt1, int nxt2, vector<int> &curTile);
-	void appendTile(__int64 wec, float c, int t, int nxt1, int nxt2, vector<OneTile> &locTileVec);
+	int newTile(int64_t wec, float c, int t, int nxt1, int nxt2);
+	int appendTile(int64_t wec, float c, int t, int nxt1, int nxt2, vector<int> &curTile);
+	void appendTile(int64_t wec, float c, int t, int nxt1, int nxt2, vector<OneTile> &locTileVec);
 	bool appendTile(vector<OneTile> &locTileVec, int & start, int & end);
 	int findMinTile(int tileind);
 

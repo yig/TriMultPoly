@@ -89,7 +89,7 @@ int DMWT::findMinTile(int tileind){
 }
 
 /// Return the index of Tile(vector<int>) in allTiles
-int DMWT::newTile(__int64 wec, float c, int t, int nxt1, int nxt2){
+int DMWT::newTile(int64_t wec, float c, int t, int nxt1, int nxt2){
 	allOneTiles.push_back(OneTile(wec, c, t, nxt1, nxt2));
 	size_t nIndex(allTiles.size());
 	allTiles.resize(nIndex+1);
@@ -98,7 +98,7 @@ int DMWT::newTile(__int64 wec, float c, int t, int nxt1, int nxt2){
 	return (int)nIndex;
 }
 
-__forceinline void DMWT::appendTile(__int64 wec, float c, int t, int nxt1, int nxt2, vector<OneTile> &locTileVec){
+__forceinline void DMWT::appendTile(int64_t wec, float c, int t, int nxt1, int nxt2, vector<OneTile> &locTileVec){
 	locTileVec.push_back(OneTile(wec, c, t, nxt1, nxt2));
 }
 
@@ -113,7 +113,7 @@ bool DMWT::appendTile(vector<OneTile> &locTileVec, int & st, int & en){
 		for (size_t i=0; i<locS; i++){
 			isSuper.push_back(false);
 		}
-		__int64 andK;
+		int64_t andK;
 		for (size_t i=1; i<locS; i++){
 			if (isSuper[i] == true) continue;
 			for (size_t j=i+1; j<locS; j++){
@@ -142,7 +142,7 @@ bool DMWT::appendTile(vector<OneTile> &locTileVec, int & st, int & en){
 }
 
 // return the index of OneTile in allOneTiles
-__forceinline int DMWT::appendTile(__int64 wec, float c, int t, int nxt1, int nxt2, vector<int> &curTile){
+__forceinline int DMWT::appendTile(int64_t wec, float c, int t, int nxt1, int nxt2, vector<int> &curTile){
 	OneTile onetile(wec, c, t, nxt1, nxt2);
 	allOneTiles.push_back(onetile);
 	curTile.push_back((int)allOneTiles.size()-1);
@@ -221,7 +221,7 @@ int DMWT::computeTriangulation(Boundary<MAXK>& B, Hole& H){
 	vector<Boundary<MAXK>> BBs;
 	vector<pair<Hole,Hole>> HHs;
 	vector<int> allWE1, allWE2, allWWEE;
-	__int64 toAvoidK1,toAvoidK2, toAvoidK;
+	int64_t toAvoidK1,toAvoidK2, toAvoidK;
 
 	for (int i=0; i<nTri; i++){
 		ff  = FF[i];
@@ -315,13 +315,13 @@ int DMWT::computeTriangulation(Boundary<MAXK>& B, Hole& H){
 								oti1=subRes1Start+tl1;
 								oti2=subRes2Start+tl2;
 
-								__int64 WEK1 = allOneTiles[oti1].WECode;
+								int64_t WEK1 = allOneTiles[oti1].WECode;
 								float C1   = allOneTiles[oti1].cost;
-								__int64 WEK2 = allOneTiles[oti2].WECode;
+								int64_t WEK2 = allOneTiles[oti2].WECode;
 								float C2   = allOneTiles[oti2].cost;
 
 								float newCost;
-								__int64 newWEK = 0;
+								int64_t newWEK = 0;
 								bool goon = true;
 								if (useWE) {
 									goon = ((WEK1 & toAvoidK1) == 0) && ((WEK2 & toAvoidK2) == 0);
@@ -394,10 +394,10 @@ int DMWT::computeTriangulation(Boundary<MAXK>& B, Hole& H){
 					for (int tl=0; tl<subResEnd-subResStart+1; tl++){
 						oti=subResStart+tl;
 
-						__int64 WWEEK = allOneTiles[oti].WECode;
+						int64_t WWEEK = allOneTiles[oti].WECode;
 						float CC   = allOneTiles[oti].cost;
 						float newCost;
-						__int64 newWEK = 0;
+						int64_t newWEK = 0;
 						bool goon = true;
 						if (useWE) {
 							goon = ((WWEEK & toAvoidK) == 0);
@@ -600,8 +600,8 @@ void DMWT::GetAllWeakEdge(Boundary<MAXK>& B,vector<int>& weSet){
 }
 
 // get the bitkey of allItem in canItem. the key has the same length of canItem, if canItem[i] exist in allItem, key[i] is set to 1
-__int64 DMWT::GetBitKey(const vector<int>& canItem,const vector<int>& allItem){
-	__int64 key = 0, mask = 1, one = 1;
+int64_t DMWT::GetBitKey(const vector<int>& canItem,const vector<int>& allItem){
+	int64_t key = 0, mask = 1, one = 1;
 	int e, pos=0, size=(int)canItem.size()-1;
 	size_t canS=canItem.size();
 	size_t allS=allItem.size();
@@ -623,10 +623,10 @@ __int64 DMWT::GetBitKey(const vector<int>& canItem,const vector<int>& allItem){
 }
 
 // recover the sub list from list, according to the key
-void DMWT::RecoverListFromBitKey(const vector<int>& list, __int64 key,vector<int>& sublist ){
+void DMWT::RecoverListFromBitKey(const vector<int>& list, int64_t key,vector<int>& sublist ){
 	sublist.clear();
 	int size = (int)list.size();
-	__int64 mask = 1, exist;
+	int64_t mask = 1, exist;
 	int item, pos = 0;
 	for (int i=size-1; i>=0; i--){
 		item = list[i];
@@ -812,7 +812,7 @@ void DMWT::buildList(){
 void DMWT::readCurveFile(const char* file){
 	// extract the name of the curve
 	filename = new char[300]; 
-	strcpy_s(filename,300,file);
+	strcpy(filename,file);
 	char* dot=strrchr(filename,'.'); *dot = '\0';
 	
 	// read curves
@@ -950,22 +950,20 @@ void DMWT::readCanTFile(const char* file){
 }
 
 void DMWT::saveTiling(){
-	char * tilefile = new char[300];
-	strcpy_s(tilefile,300,filename);
+	std::string tilefile = filename;
 	if (useDT) {
-		strcat_s(tilefile,300,"_dyn");
+		tilefile += "_dyn";
 	} else {
-		strcat_s(tilefile,300,"_all");
+		tilefile += "_all";
 	}
 	if (saveObj){
-		strcat_s(tilefile,300,".obj");
-		saveTilingObj(tilefile);
+		tilefile += ".obj";
+		saveTilingObj(tilefile.c_str());
 	}
-	delete [] tilefile;
 }
 
 // save tiling
-void DMWT::saveTiling(char* tilefile){
+void DMWT::saveTiling(const char* tilefile){
 	int n = (int) optTile.size();
 	std::ofstream writer(tilefile, std::ofstream::out);
 	if (!writer.good()) exit(1);
@@ -977,7 +975,7 @@ void DMWT::saveTiling(char* tilefile){
 	else writer << optTile[n-1]+1 << "}\n";
 	writer.close();
 }
-void DMWT::saveTilingObj(char* tilefile){
+void DMWT::saveTilingObj(const char* tilefile){
 	int n = (int) optTile.size();
 	std::ofstream writer(tilefile, std::ofstream::out);
 	if (!writer.good()) exit(1);

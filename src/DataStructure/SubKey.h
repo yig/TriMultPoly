@@ -4,6 +4,8 @@
 #ifndef _SUB_KEY_H_
 #define _SUB_KEY_H_
 
+#include <cstddef>
+
 template <int k>
 class SubKey{
 public:

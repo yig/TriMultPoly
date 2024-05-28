@@ -13,7 +13,7 @@ extern int tileNum;
 
 class OneTile {
 public:
-	__int64 WECode;
+	int64_t WECode;
 	float cost;
 	int tri;
 #if (_SaveTile==1)
@@ -28,7 +28,7 @@ public:
 		next1 = -1; next2 = -1;
 #endif
 	}
-	OneTile(__int64 wec, float c, int t, int nxt1, int nxt2){
+	OneTile(int64_t wec, float c, int t, int nxt1, int nxt2){
 		//tileNum++;
 		WECode = wec; cost = c; tri = t; 
 #if (_SaveTile==1)

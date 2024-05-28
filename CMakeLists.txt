@@ -12,6 +12,7 @@ add_library(tetgen OBJECT
     ExternalLibs/tetgen/tetgen1.4.3/src/predicates.cxx
     )
 target_include_directories(tetgen PUBLIC ExternalLibs/tetgen/tetgen1.4.3/inc)
+target_compile_definitions(tetgen PRIVATE TETLIBRARY)
 
 ## Declare the executable
 add_executable(TriMultPoly

@@ -1,0 +1,1 @@
+Some #define at the beginning need to be commented or uncommented when used as include for a library.
